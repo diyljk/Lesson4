@@ -1,0 +1,27 @@
+@media (max-width: 767px) {
+    .main {
+        left: 10px;
+        right: 10px;
+        top: 50%;
+        bottom: 12px;
+        width: auto;
+        max-width: none;
+    }
+}
+
+@media (max-width: 420px) {
+    .main-sizes {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 360px) {
+    .main-speed-btn {
+        font-size: 13px;
+        gap: 6px;
+    }
+    .main-speed-icon {
+        width: 18px;
+        height: 18px;
+    }
+}
