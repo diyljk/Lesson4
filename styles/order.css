@@ -248,7 +248,7 @@
     margin-top: 6px;
 }
 
-.main-speed-btn {
+.main-speed-card {
     flex: 1;
     display: flex;
     align-items: center;
@@ -267,7 +267,7 @@
     transition: transform .08s ease, border-color .12s ease, background .12s ease;
 }
 
-.main-speed-btn:hover {
+.main-speed-card:hover {
     transform: translateY(-1px);
 }
 
@@ -277,7 +277,7 @@
     object-fit: contain;
 }
 
-.main-speed-btn.is-active {
+.main-speed-card.is-active {
     background-color: #F8F2D6; /* Цвет из .main-size-card.is-active */
     border-color: #B7B196;
 }

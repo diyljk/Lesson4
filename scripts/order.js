@@ -20,8 +20,9 @@ const commentInput = document.getElementById('comment');
 const orderSuccessBlock = document.getElementById('orderSuccess');
 const orderIdValue = document.getElementById('orderId');
 
-// Элементы карточек размеров
+// Элементы карточек размеров и скоростей
 const sizes = document.querySelectorAll('.main-size-card');
+const speeds = document.querySelectorAll('.main-speed-card');
 
 // Переменные для карты, маршрута и расчетов
 let map;
@@ -47,27 +48,14 @@ ymaps.ready(() => {
 	new ymaps.SuggestView('to');
 	
 	// Логика выбора размера посылки
-	sizes.forEach(element => {
-		element.addEventListener('click', () => {
-			sizes.forEach((c) => c.classList.toggle('is-active', c.dataset.value === element.dataset.value));
-			renderInfo();
-		})
-	});
-	
-	// Основной расчет: строим маршрут и считаем стоимость.
-	calcButton.addEventListener('click', () => {
-		// Удаляем старый маршрут с карты.
-		if (mapRoute) {
-			map.geoObjects.remove(mapRoute);
-			mapRoute = null;
-		}
-
-		// Создаем новый маршрут по введенным точкам.
-		mapRoute = new ymaps.multiRouter.MultiRoute({referencePoints: [fromInput.value, toInput.value]}, {boundsAutoApply: false});
-
-		// Добавляем новый маршрут на карту.
-		map.geoObjects.add(mapRoute);
-	});
+ [sizes, speeds].forEach(group => {
+                  group.forEach(element => {
+                      element.addEventListener('click', () => {
+               group.forEach((c) => c.classList.toggle('is-active', c.dataset.value === element.dataset.value));
+    renderInfo();
+             })
+         });
+		 }); 	
 	
 	// Дизейблим кнопку Рассчитать если одного или двух значений нет
 	[fromInput, toInput].forEach((input) => {
@@ -110,7 +98,14 @@ calcButton.addEventListener('click', () => {
 			let total = Math.max(MIN_BY_SIZE[size], Math.ceil(km * RATES[size]));
 			// Просчитываем длительность доставки
 			let duration = Math.min(30, 1 + Math.ceil(km / 80));
-
+			
+			// Увеличиваем на 15% и сокращаем время на 30%
+            const speed = document.querySelector('.main-speed-card.is-active').dataset.value;
+            if (speed === 'fast') {
+                total = Math.ceil(total * 1.15);
+                duration = Math.ceil(duration - (duration * 0.30));
+            }
+			
 			calculation = {
 				from: fromInput.value,
 				to: toInput.value,
@@ -118,7 +113,8 @@ calcButton.addEventListener('click', () => {
 				distance: km.toFixed(1),
 				duration: duration,
 				rate: RATES[size],
-				total: total
+				total: total,
+				speed: speed
 			};
 
 			// Выводим результат на экран.

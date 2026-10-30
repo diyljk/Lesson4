@@ -14,6 +14,7 @@
 	<script src="https://testologia.ru/ymc_min.js" data-apikey="7baa2a4c-5885-4ba7-975c-11ceb4c29a5c" data-suggest-apikey="847fdd93-f0e8-4c53-a5ec-1ffa12825411"></script>
 </head>
 <body>
+		<div id="map"></div>
 		<header class="header">
 			<a class="header-brand" href="./index.html">
 				<div class="header-logo">D</div>
@@ -24,7 +25,6 @@
 				<a class="header-link" href="./track.html">Отследить <span>посылку</span></a>
 			</nav>
 		</header> 
-	<div id="map"></div>
 	<aside class="main" id="sidebar">
 		<div class="main-header">
 			<div class="main-title">Оформление доставки</div>
@@ -122,13 +122,13 @@
 			
 			<div class="main-speed">
 				<div class="main-block-title">Скорость доставки</div>
-				<div class="main-speed-selection">
-					<button type="button" class="main-speed-btn is-active">
+				<div class="main-speeds">
+					<button type="button" class="main-speed-card is-active" data-value="regular">
 						<img src="images/icons/standard.svg" class="main-speed-icon" alt="Обычная"/>
 						<span>Обычная</span>
 					</button>
 
-					<button type="button" class="main-speed-btn">
+					<button type="button" class="main-speed-card" data-value="fast">
 						<img src="images/icons/priority.svg" class="main-speed-icon" alt="Приоритетная"/>
 						<span>Приоритетная</span>
 					</button>
